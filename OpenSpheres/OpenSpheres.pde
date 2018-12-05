@@ -1,6 +1,7 @@
 // Calculates ring tables for "Chainmail Spheres"
 // by Les Hall
 // Sun Nov 11 2018
+// Wed Dec  5 2018
 // 
 
 
