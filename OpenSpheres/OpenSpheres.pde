@@ -8,7 +8,7 @@
 // initialize the user visible variables
 float diameter = 3 * 25.4;  // sphere diameter
 int egg = 0;  // egg shape selection
-int ring = 1;  // ring geometry selection
+int ring = 4;  // ring geometry selection
 
 
 // shape values
@@ -25,11 +25,14 @@ String maille[] = {
   "Kingsmaille (x2)", 
   "Kingsmaille (x2)", 
   "Kingsmaille (x2)", 
-  "European 8-1"};
-float ID[] = {9.53, 10.0, 5.7, 7.0};
-float AR[] = {4.7, 4.8, 4.75, 5.8};
-float horiz[] = {0.74, 0.773, 0.743, 0.417};
-float vert[] = {0.895, 0.715, 0.799, 0.679};
+  "European 8-1", 
+  "European 8-1", 
+  "European 8-1"
+};
+float ID[] = {9.53, 10.0, 5.7, 7.0, 12.7, 7.0/16.0*25.4};
+float AR[] = {4.7, 4.8, 4.75, 5.8, 5.5, 5.7};
+float horiz[] = {0.74, /*0.773*/0.81, 0.743, 0.417, 0.4188, 0.417};
+float vert[] = {0.895, /*0.715*/0.82, 0.841, 12.7/(12.7+2.4), 0.841, 12.7/(12.7+2.0)};
 String weave = maille[ring];  // weave type
 float ringID = ID[ring];  // ring inside diameter
 float kh = horiz[ring];  // horizontal proportionality constant
