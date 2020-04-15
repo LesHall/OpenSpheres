@@ -6,7 +6,7 @@
 
 
 // initialize the user visible variables
-float diameter = 5 * 25.4;  // sphere diameter
+float diameter = 2.5 * 25.4;  // sphere diameter
 int ring = 0;  // ring geometry selection
 
 
@@ -14,7 +14,7 @@ int ring = 0;  // ring geometry selection
 String maille[] = {
   "E8-1 TRL SXAB1212"
 };
-float ID[] = {12.7};
+float 6[] = {12.7};
 float WD[] = {2.4};
 float horiz[] = {0.4188};
 float vert[] = {0.6692};
