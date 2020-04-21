@@ -16,8 +16,8 @@ String maille[] = {
   "E8-1 TRL SXAB1212"};
 float ID[] = {3.0/8.0 * 25.4, 12.7};
 float WD[] = {2.0, 2.4};
-float horiz[] = {0.74, 0.828};
-float vert[] = {0.896, 0.80};
+float horiz[] = {0.74, 0.555};
+float vert[] = {0.896, 0.717};
 
 // select from above tables for this run
 String weave = maille[ring];  // weave type
@@ -41,13 +41,9 @@ int textSize = 25;
 // variables related to table contents
 int n = 0;
 int m = 0;
-int[] mList = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-               0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int[] mList = {};
 int delta = 0;
-int dList[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-               0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int dList[] = {};
 int total = 0;
 
 
@@ -109,12 +105,12 @@ void draw() {
      
     // remember delta values
     if (n > 0) {
-      delta = mList[n] - mList[n-1];
+      delta = mList[n-1] - mList[n];
     } else {
       delta = 0;
     }
     dList = append(dList, delta);
-    
+
     // write the rings per row text
     // which is the main purpose of the program
     if ( (m > 0) && (n >= 0) ) {
@@ -122,7 +118,7 @@ void draw() {
       text(int(m), 180, 180 + textSize * (n+3.0/2.0) );
     }
     if (n > 0) {
-      text(dList[n-1], 250, 180 + textSize * (n+3.0/2.0) );
+      text(dList[n-1], 250, 180 + textSize * (n+1.0/2.0) );
     }
     
     // update counters
