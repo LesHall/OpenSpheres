@@ -6,8 +6,9 @@
 
 
 // initialize the user visible variables
-float diameter = 2.5 * 25.4;  // sphere diameter
+float diameter = 5 * 25.4;  // sphere diameter
 int ring = 1;  // ring geometry selection
+boolean debug = true;
 
 // make tables of values for known ring types
 // ring values
@@ -27,7 +28,6 @@ float kv = vert[ring];  // vertical proportionality constant
 
 
 // parameters
-boolean debug = !true;
 color bgColor = color(20, 00, 30);
 color fgColor = color(20, 80, 20);
 color textColor = color(0, 205, 0);
@@ -45,7 +45,8 @@ int[] mList = {};
 int delta = 0;
 int dList[] = {};
 int total = 0;
-
+int originX = 0;  // where to put text (what column)
+int originY = 0;  // where to put text (what row)
 
 
 void setup() {
@@ -55,8 +56,12 @@ void setup() {
   rectMode(CENTER);
   
   // expand arrays
-  expand(mList);
-  expand(dList);
+  expand(mList, 1024);
+  expand(dList, 1024);
+  
+  // sret origin
+  originX = 200;
+  originY = 200;
 }
 
 
@@ -64,7 +69,7 @@ void setup() {
 
 void draw() {
   
-  // graphics stuff
+  // graphics stuf f
   background(bgColor);
 
   // title
@@ -83,7 +88,7 @@ void draw() {
   // table header
   textAlign(RIGHT, TOP);
   text("row", 107, 180);
-  text("rings", 185 +10, 180);
+  text("ring", 185 +10, 180);
   text("delta", 285, 180);
 
   // set variables
@@ -96,34 +101,32 @@ void draw() {
       
      // make calculations
      m =  int( round( (2*PI * r / (kh*di)) * cos( (kv*di/r) * n) ) );
-     if (debug) { 
-       println(r + "\t" + di + "\t" + kh + "\t" + kv + "\t");
-     }
        
     // prepare the list of ring per row and fill it also
     mList = append(mList, m);  // fill
      
     // remember delta values
-    if (n > 0) {
+    if (n>0)
       delta = mList[n-1] - mList[n];
-    } else {
+    else
       delta = 0;
-    }
     dList = append(dList, delta);
-
+    
+  
+    // update origin of text placement
+    int column = floor(n/10.0);
+    originX = 100 + 50 * column;
+    originY = 210 + 30 * (n % 10);
     // write the rings per row text
     // which is the main purpose of the program
-    if ( (m > 0) && (n >= 0) ) {
-      text(int(n), 100, 180 + textSize * (n+3.0/2.0) );
-      text(int(m), 180, 180 + textSize * (n+3.0/2.0) );
-    }
-    if (n > 0) {
-      text(dList[n-1], 250, 180 + textSize * (n+1.0/2.0) );
-    }
-    
+    text(column, originX, originY);
+    //text(m, originX, originY);
+
     // update counters
     n++;
     total += m * (n == 0 ? 1 : 2);
+      
+   // end the do/while loop
   } while (m >= 0);
 
   // print out the table summary
