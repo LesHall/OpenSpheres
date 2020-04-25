@@ -6,7 +6,7 @@
 
 
 // initialize the user visible variables
-float diameter = 5 * 25.4;  // sphere diameter
+float diameter = 7.0 * 25.4;  // sphere diameter
 int ring = 1;  // ring geometry selection
 boolean debug = true;
 
@@ -52,7 +52,7 @@ int originY = 0;  // where to put text (what row)
 void setup() {
   
   // graphics stuff
-  size(400, 800);
+  size(800, 600);
   rectMode(CENTER);
   
   // expand arrays
@@ -85,11 +85,6 @@ void draw() {
   // text setings
   textAlign(RIGHT, TOP);
   
-  // table header
-  textAlign(RIGHT, TOP);
-  text("row", 107, 180);
-  text("ring", 185 +10, 180);
-  text("delta", 285, 180);
 
   // set variables
   n = 0;
@@ -104,25 +99,22 @@ void draw() {
        
     // prepare the list of ring per row and fill it also
     mList = append(mList, m);  // fill
-     
-    // remember delta values
-    if (n>0)
-      delta = mList[n-1] - mList[n];
-    else
-      delta = 0;
-    dList = append(dList, delta);
-    
-  
+       
     // update origin of text placement
-    int column = floor(n/10.0);
-    originX = 100 + 50 * column;
-    originY = 210 + 30 * (n % 10);
-    // write the rings per row text
-    // which is the main purpose of the program
-    text(column, originX, originY);
-    //text(m, originX, originY);
+    textAlign(RIGHT, TOP);
+    int row = n % 10;
+    int column = (n - row) / 10;
+    originX = 80 + 140 * column;
+    originY = 200 + 25 * row;
+    // table header
+    if ( row == 0 ) {
+      text("row", originX, originY);
+      text("ring", originX + 70, originY);
+    }
+    text(n, originX, originY + 40);
+    text(m, originX + 50, originY + 40);
 
-    // update counters
+    // update counters 
     n++;
     total += m * (n == 0 ? 1 : 2);
       
@@ -130,8 +122,8 @@ void draw() {
   } while (m >= 0);
 
   // print out the table summary
-  textAlign(CENTER);
+  textAlign(CENTER, BOTTOM);
   textSize(30);
-  text(weave, width/2, height - 7*textSize);
-  text("total:  " + int(total), width/2, height -5.5*textSize);
+  text(weave, width/2, height - 2*textSize);
+  text("total:  " + int(total), width/2, height -1.0/2.0*textSize);
 }
